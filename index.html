@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilfried KOFFI - Portfolio</title>
     
-    <!-- Tailwind CSS pour le style -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuration Tailwind pour des couleurs personnalisées -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb', // Bleu électrique/professionnel
+                        primary: '#2563eb',
                         secondary: '#1e40af',
-                        light: '#f8fafc',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -29,13 +28,17 @@
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome pour les icônes -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body { font-family: 'Inter', sans-serif; }
         .glass-effect {
             background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .dark .glass-effect {
+            background: rgba(17, 24, 39, 0.9);
             backdrop-filter: blur(10px);
         }
         .card-hover {
@@ -45,32 +48,54 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-primary selection:text-white">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-effect border-b border-gray-100 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 glass-effect border-b border-gray-100 dark:border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo / Nom -->
+                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="text-xl font-bold text-gray-900 tracking-tight">
+                    <a href="#home" class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
                         W. <span class="text-primary">KOFFI</span>
                     </a>
                 </div>
                 
                 <!-- Menu Desktop -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">À propos</a>
-                    <a href="#skills" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">Compétences</a>
-                    <a href="#experience" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">Expériences & Projets</a>
-                    <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-secondary transition-colors shadow-sm">Contactez-moi</a>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#about" class="nav-about text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium">À propos</a>
+                    <a href="#skills" class="nav-skills text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium">Compétences</a>
+                    <a href="#experience" class="nav-exp text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium">Expériences & Projets</a>
+                    
+                    <!-- Bouton Changement de Langue -->
+                    <button id="lang-toggle" onclick="toggleLanguage()" class="px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 text-xs font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        EN / FR
+                    </button>
+
+                    <!-- Bouton Dark/Light Theme -->
+                    <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+
+                    <a href="#contact" class="nav-contact bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-secondary transition-colors shadow-sm">Contactez-moi</a>
                 </div>
 
-                <!-- Menu Mobile Bouton -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                <!-- Menu Mobile Bouton (Contrôles groupés) -->
+                <div class="md:hidden flex items-center space-x-3">
+                    <button onclick="toggleLanguage()" class="px-2 py-1 rounded border border-gray-300 dark:border-gray-700 text-xs font-semibold">
+                        EN / FR
+                    </button>
+                    <button onclick="toggleTheme()" class="p-2 text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="text-gray-600 dark:text-gray-300 focus:outline-none p-2">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -78,96 +103,93 @@
         </div>
         
         <!-- Menu Mobile Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-3 space-y-1 shadow-lg">
-            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">À propos</a>
-            <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Compétences</a>
-            <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Expériences & Projets</a>
-            <a href="#contact" class="block px-3 py-2 mt-4 text-center rounded-md text-base font-medium bg-primary text-white hover:bg-secondary">Contactez-moi</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 px-4 pt-3 pb-4 space-y-2 shadow-lg">
+            <a href="#about" class="nav-about block py-2 text-base font-medium text-gray-700 dark:text-gray-200">À propos</a>
+            <a href="#skills" class="nav-skills block py-2 text-base font-medium text-gray-700 dark:text-gray-200">Compétences</a>
+            <a href="#experience" class="nav-exp block py-2 text-base font-medium text-gray-700 dark:text-gray-200">Expériences & Projets</a>
+            <a href="#contact" class="nav-contact block text-center py-2 rounded-md text-base font-medium bg-primary text-white">Contactez-moi</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
-        <!-- Décoration d'arrière-plan -->
-        <div class="absolute inset-0 z-0 opacity-30">
-            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-100 blur-3xl"></div>
-            <div class="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-blue-50 blur-3xl"></div>
+        <div class="absolute inset-0 z-0 opacity-20 dark:opacity-10">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-300 blur-3xl"></div>
+            <div class="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-blue-400 blur-3xl"></div>
         </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-primary text-sm font-semibold tracking-wider mb-6 border border-blue-100">
+            <span class="hero-badge inline-block py-1 px-3 rounded-full bg-blue-50 dark:bg-blue-900/40 text-primary text-sm font-semibold tracking-wider mb-6 border border-blue-100 dark:border-blue-800">
                 PORTFOLIO PROFESSIONNEL
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-4">
-                Bonjour, je suis <span class="text-primary block mt-2">Kouassi Wilfried KOFFI </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
+                <span class="hero-greeting">Bonjour, je suis</span> <span class="text-primary block mt-2">Kouassi Wilfried KOFFI</span>
             </h1>
-            <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto font-light leading-relaxed">
-                Étudiant en Ingénierie Électrique avec une solide base théorique et pratique en circuits, systèmes énergétiques et programmation .
+            <p class="hero-desc mt-4 max-w-2xl text-xl text-gray-600 dark:text-gray-300 mx-auto font-light leading-relaxed">
+                Étudiant en Ingénierie Électrique avec une solide base théorique et pratique en circuits, systèmes énergétiques et programmation.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#experience" class="inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-secondary shadow-lg shadow-blue-500/30 transition-all">
+                <a href="#experience" class="btn-projects inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-secondary shadow-lg shadow-blue-500/30 transition-all">
                     Voir mes projets
                 </a>
-                <a href="#contact" class="inline-flex justify-center items-center px-8 py-3 border-2 border-gray-200 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all">
+                <a href="#contact" class="btn-contact inline-flex justify-center items-center px-8 py-3 border-2 border-gray-200 dark:border-gray-700 text-base font-medium rounded-full text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
                     Me contacter
                 </a>
             </div>
             
             <div class="mt-16 flex justify-center space-x-6 text-gray-400">
-                <a href="#" class="hover:text-primary transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="hover:text-gray-900 transition-colors text-2xl"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/koffi-wilfried-57b8b9224" class="hover:text-primary transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/androsdarkside" class="hover:text-gray-900 dark:hover:text-white transition-colors text-2xl"><i class="fab fa-github"></i></a>
                 <a href="mailto:Kouassi.w.koffi@gmail.com" class="hover:text-primary transition-colors text-2xl"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Profil</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <h2 class="about-tag text-sm font-bold text-primary tracking-wide uppercase">Profil</h2>
+                <p class="about-title mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                     À propos de moi
                 </p>
                 <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-                <!-- Image Placeholder ou Illustration -->
+                <!-- Image avec fond blanc -->
                 <div class="w-full md:w-5/12 relative">
-                    <div class="aspect-w-4 aspect-h-5 rounded-2xl overflow-hidden shadow-xl bg-white flex items-center justify-center border-4 border-white">
-                        <img src="profil_IA.png"" alt="Wilfried KOFFI" class="object-cover w-full h-full" style="background-color: white;">
+                    <div class="aspect-w-4 aspect-h-5 rounded-2xl overflow-hidden shadow-xl bg-white flex items-center justify-center border-4 border-white dark:border-gray-700">
+                        <img src="profil_IA.png" alt="Wilfried KOFFI" class="object-cover w-full h-full" style="background-color: #ffffff;">
                     </div>
-                    <!-- Décoration -->
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-50 rounded-full z-[-1]"></div>
-                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gray-100 rounded-full z-[-1]"></div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-50 dark:bg-blue-900/20 rounded-full z-[-1]"></div>
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full z-[-1]"></div>
                 </div>
 
                 <!-- Texte -->
                 <div class="w-full md:w-7/12 space-y-6">
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Actuellement <strong class="text-gray-900 font-semibold">Élève Ingénieur (Bachelor 1, 2 et 3) à l'Institut 2iE</strong> (Ouagadougou), je me spécialise dans le Génie Électrique et Énergétique. Mon parcours académique s'appuie sur de solides bases scientifiques acquises lors de l'obtention de mon <strong class="text-gray-900 font-semibold">Baccalauréat Série D au Lycée de Garçons de Bingerville</strong> (Côte d'Ivoire) en 2021 .
+                    <p class="about-text-1 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Actuellement <strong class="text-gray-900 dark:text-white font-semibold">Élève Ingénieur (Bachelor 1, 2 et 3) à l'Institut 2iE</strong> (Ouagadougou), je me spécialise dans le Génie Électrique et Énergétique. Mon parcours s'appuie sur de solides bases scientifiques acquises lors de l'obtention de mon <strong class="text-gray-900 dark:text-white font-semibold">Baccalauréat Série D au Lycée de Garçons de Bingerville</strong> (Côte d'Ivoire) en 2021.
                     </p>
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Passionné par la robotique et l'informatique, je suis ouvert à toute opportunité qui me permettra de contribuer activement au développement de solutions technologiques innovantes dans le secteur de l'énergie .
+                    <p class="about-text-2 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Passionné par la robotique et l'informatique, je suis ouvert à toute opportunité qui me permettra de contribuer activement au développement de solutions technologiques innovantes dans le secteur de l'énergie.
                     </p>
-                    <div class="grid grid-cols-2 gap-4 pt-4">
-                        <div class="flex items-center space-x-3 text-gray-700">
+                    <div class="grid grid-cols-2 gap-4 pt-4 text-gray-700 dark:text-gray-300">
+                        <div class="flex items-center space-x-3">
                             <i class="fas fa-graduation-cap text-primary"></i>
-                            <span>Institut 2iE (Ouagadougou) </span>
+                            <span>Institut 2iE (Ouagadougou)</span>
                         </div>
-                        
-                        <div class="flex items-center space-x-3 text-gray-700">
+                        <div class="flex items-center space-x-3">
                             <i class="fas fa-bolt text-primary"></i>
-                            <span>Génie Électrique </span>
+                            <span class="info-elec">Génie Électrique</span>
                         </div>
-                        <div class="flex items-center space-x-3 text-gray-700">
+                        <div class="flex items-center space-x-3">
                             <i class="fas fa-leaf text-primary"></i>
-                            <span>Systèmes Énergétiques </span>
+                            <span class="info-energy">Systèmes Énergétiques</span>
                         </div>
-                        <div class="flex items-center space-x-3 text-gray-700">
+                        <div class="flex items-center space-x-3">
                             <i class="fas fa-language text-primary"></i>
-                            <span>Anglais (Intermédiaire) </span>
+                            <span class="info-lang">Anglais (Intermédiaire)</span>
                         </div>
                     </div>
                 </div>
@@ -176,39 +198,39 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Expertise</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <h2 class="skills-tag text-sm font-bold text-primary tracking-wide uppercase">Expertise</h2>
+                <p class="skills-title mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                     Mes Compétences
                 </p>
                 <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
-                <p class="mt-4 text-gray-600 text-lg">Un panel de compétences techniques alliées à des outils professionnels de pointe.</p>
+                <p class="skills-subtitle mt-4 text-gray-600 dark:text-gray-400 text-lg">Un panel de compétences techniques alliées à des outils professionnels de pointe.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Ingénierie Électrique & Énergie Solaire -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                <!-- Box 1 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 card-hover">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
                         <i class="fas fa-solar-panel"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Ingénierie Électrique & Énergie Solaire</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Analyse et conception de circuits DC et AC </li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Systèmes énergétiques (solaire, hydraulique, thermique) </li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électromagnétisme, transformateurs et bobines </li>
+                    <h3 class="skill-box-1-title text-xl font-bold text-gray-900 dark:text-white mb-4">Ingénierie Électrique & Énergie Solaire</h3>
+                    <ul class="skill-box-1-list space-y-3 text-gray-600 dark:text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Analyse et conception de circuits DC et AC</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Systèmes énergétiques (solaire, hydraulique, thermique)</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électromagnétisme, transformateurs et bobines</li>
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Dimensionnement et configuration d'onduleurs hybrides</li>
                     </ul>
                 </div>
 
-                <!-- Automatisme Industriel -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                <!-- Box 2 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 card-hover">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Automatisme Industriel</h3>
-                    <ul class="space-y-3 text-gray-600">
+                    <h3 class="skill-box-2-title text-xl font-bold text-gray-900 dark:text-white mb-4">Automatisme Industriel</h3>
+                    <ul class="skill-box-2-list space-y-3 text-gray-600 dark:text-gray-300">
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation LADDER & GRAFCET</li>
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Zelio Soft 2</li>
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Logiciel Crouzet Millenium 3</li>
@@ -216,31 +238,31 @@
                     </ul>
                 </div>
 
-                <!-- Électronique & Maintenance -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                <!-- Box 3 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 card-hover">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Électronique & Maintenance</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électronique de base (diodes, transistors) </li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Outils de laboratoire (oscilloscope, multimètre) </li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Diagnostic et réparation de cartes mères (niveau composant)</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maintenance de groupes électrogènes (gestion de fluides) </li>
+                    <h3 class="skill-box-3-title text-xl font-bold text-gray-900 dark:text-white mb-4">Électronique & Maintenance</h3>
+                    <ul class="skill-box-3-list space-y-3 text-gray-600 dark:text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électronique de base (diodes, transistors)</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Outils de laboratoire (oscilloscope, multimètre)</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Diagnostic et réparation de cartes mères</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maintenance de groupes électrogènes (gestion de fluides)</li>
                     </ul>
                 </div>
 
-                <!-- Programmation -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                <!-- Box 4 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 card-hover">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Programmation & Informatique</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation en C, Python et Skylab </li>
+                    <h3 class="skill-box-4-title text-xl font-bold text-gray-900 dark:text-white mb-4">Programmation & Informatique</h3>
+                    <ul class="skill-box-4-list space-y-3 text-gray-600 dark:text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation en C, Python et Skylab</li>
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation de microcontrôleurs (Arduino)</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Développement Web (HTML / CSS) </li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Word et PowerPoint </li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Développement Web (HTML / CSS)</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Word et PowerPoint</li>
                     </ul>
                 </div>
             </div>
@@ -248,105 +270,105 @@
     </section>
 
     <!-- Experience & Projects Section -->
-    <section id="experience" class="py-20 bg-white">
+    <section id="experience" class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Parcours</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <h2 class="exp-tag text-sm font-bold text-primary tracking-wide uppercase">Parcours</h2>
+                <p class="exp-title mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                     Expériences & Projets
                 </p>
                 <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
             </div>
 
-            <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+            <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 dark:before:via-gray-700 before:to-transparent">
                 
                 <!-- Stage Suka Power -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-briefcase text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Suka Power Limited</h3>
-                            <span class="text-sm text-primary font-medium bg-blue-50 px-3 py-1 rounded-full">Stage</span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl">Suka Power Limited</h3>
+                            <span class="badge-stage text-sm text-primary font-medium bg-blue-50 dark:bg-blue-900/40 px-3 py-1 rounded-full">Stage</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Ghana (Juillet - Octobre 2026)</p>
-                        <p class="text-gray-500 text-sm">Conception, dimensionnement et évaluation de systèmes solaires photovoltaïques. Application pratique des normes électriques et optimisation des installations.</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium">Ghana (Juillet - Octobre 2026)</p>
+                        <p class="exp-desc-1 text-gray-500 dark:text-gray-300 text-sm">Conception, dimensionnement et évaluation de systèmes solaires photovoltaïques. Application pratique des normes électriques et optimisation des installations.</p>
                     </div>
                 </div>
 
                 <!-- Stage INOVATEC -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-industry text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">INOVATEC </h3>
-                            <span class="text-sm text-blue-700 font-medium bg-blue-50 px-3 py-1 rounded-full">Stage d'Immersion </span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl">INOVATEC</h3>
+                            <span class="badge-immersion text-sm text-blue-700 dark:text-blue-300 font-medium bg-blue-50 dark:bg-blue-900/40 px-3 py-1 rounded-full">Stage d'Immersion</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Marcory, Abidjan (Août 2024) </p>
-                        <p class="text-gray-500 text-sm">Maintenance préventive du groupe électrogène Genesal 1500 KVA utilisé au NOOM HOTEL . Gestion des fluides, inspection visuelle, remplacement de pièces, vérifications électriques et tests fonctionnels .</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium">Marcory, Abidjan (Août 2024)</p>
+                        <p class="exp-desc-2 text-gray-500 dark:text-gray-300 text-sm">Maintenance préventive du groupe électrogène Genesal 1500 KVA utilisé au NOOM HOTEL. Gestion des fluides, inspection visuelle, remplacement de pièces, vérifications électriques et tests fonctionnels.</p>
                     </div>
                 </div>
 
                 <!-- NELSINO -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-orange-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-orange-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-wrench text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">NELSINO </h3>
-                            <span class="text-sm text-orange-700 font-medium bg-orange-50 px-3 py-1 rounded-full">Indépendant </span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl">NELSINO</h3>
+                            <span class="badge-indep text-sm text-orange-700 dark:text-orange-300 font-medium bg-orange-50 dark:bg-orange-900/40 px-3 py-1 rounded-full">Indépendant</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Kamboinsin, Burkina Faso (2023 - Présent) </p>
-                        <p class="text-gray-500 text-sm">Réparation et maintenance d'équipements informatiques (PC portables, de bureau) et appareils électroniques (smartphones, tablettes) . Diagnostic de pannes matérielles et logicielles, remplacement de composants défectueux et assistance aux clients .</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium">Kamboinsin, Burkina Faso (2023 - Présent)</p>
+                        <p class="exp-desc-3 text-gray-500 dark:text-gray-300 text-sm">Réparation et maintenance d'équipements informatiques et appareils électroniques. Diagnostic de pannes, remplacement de composants défectueux et assistance aux clients.</p>
                     </div>
                 </div>
 
                 <!-- DIGI-PRINT -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-gray-700 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-gray-700 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-print text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">DIGI-PRINT</h3>
-                            <span class="text-sm text-gray-600 font-medium bg-gray-200 px-3 py-1 rounded-full">Entrepreneuriat</span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl">DIGI-PRINT</h3>
+                            <span class="badge-ent text-sm text-gray-600 dark:text-gray-300 font-medium bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">Entrepreneuriat</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Campus 2iE (2026)</p>
-                        <p class="text-gray-500 text-sm">Gestion complète d'un service d'impression sur le campus universitaire. Développement de compétences en gestion, relation client et maintenance des équipements d'impression.</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium">Campus 2iE (2026)</p>
+                        <p class="exp-desc-4 text-gray-500 dark:text-gray-300 text-sm">Gestion complète d'un service d'impression sur le campus universitaire. Développement de compétences en gestion, relation client et maintenance des équipements d'impression.</p>
                     </div>
                 </div>
 
                 <!-- Projet COWIE -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-green-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-green-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-leaf text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Projet COWIE</h3>
-                            <span class="text-sm text-green-700 font-medium bg-green-50 px-3 py-1 rounded-full">Projet Maker</span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl">Projet COWIE</h3>
+                            <span class="badge-proj text-sm text-green-700 dark:text-green-300 font-medium bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Projet Maker</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Système de refroidissement éco-bioclimatique</p>
-                        <p class="text-gray-500 text-sm">Conception et développement d'une solution de refroidissement innovante basée sur des principes bioclimatiques, visant à réduire la consommation énergétique en combinant évaporation et géothermie.</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium exp-cowie-sub">Système de refroidissement éco-bioclimatique</p>
+                        <p class="exp-desc-5 text-gray-500 dark:text-gray-300 text-sm">Conception et développement d'une solution de refroidissement innovante basée sur des principes bioclimatiques, visant à réduire la consommation énergétique.</p>
                     </div>
                 </div>
 
                 <!-- Casque Moto Intelligent -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-red-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-800 bg-red-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         <i class="fas fa-motorcycle text-sm"></i>
                     </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-sm card-hover">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Casque Intelligent</h3>
-                            <span class="text-sm text-red-600 font-medium bg-red-50 px-3 py-1 rounded-full">Projet IoT</span>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-xl exp-helmet-title">Casque Intelligent</h3>
+                            <span class="badge-iot text-sm text-red-600 dark:text-red-300 font-medium bg-red-50 dark:bg-red-900/40 px-3 py-1 rounded-full">Projet IoT</span>
                         </div>
-                        <p class="text-gray-600 mb-3 font-medium">Prototype sous Arduino</p>
-                        <p class="text-gray-500 text-sm">Création d'un prototype de casque de moto intelligent intégrant des capteurs. Programmation sous Arduino pour envoyer automatiquement des alertes SMS d'urgence via Bluetooth et une application mobile en cas de choc.</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-3 font-medium exp-helmet-sub">Prototype sous Arduino</p>
+                        <p class="exp-desc-6 text-gray-500 dark:text-gray-300 text-sm">Création d'un prototype de casque de moto intelligent intégrant des capteurs. Programmation sous Arduino pour envoyer automatiquement des alertes SMS d'urgence en cas de choc.</p>
                     </div>
                 </div>
 
@@ -358,28 +380,28 @@
     <section id="contact" class="py-20 bg-gray-900 text-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Prêt à collaborer ?</h2>
-                <p class="mt-4 text-lg text-gray-400">N'hésitez pas à me contacter pour un stage, un projet ou toute opportunité professionnelle.</p>
+                <h2 class="contact-title text-3xl font-extrabold tracking-tight sm:text-4xl">Prêt à collaborer ?</h2>
+                <p class="contact-subtitle mt-4 text-lg text-gray-400">N'hésitez pas à me contacter pour un stage, un projet ou toute opportunité professionnelle.</p>
             </div>
 
             <div class="bg-gray-800 rounded-2xl p-8 md:p-10 shadow-2xl border border-gray-700">
                 <form class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300">Nom complet</label>
+                            <label for="name" class="contact-label-name block text-sm font-medium text-gray-300">Nom complet</label>
                             <input type="text" id="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="Votre nom">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300">Adresse Email</label>
+                            <label for="email" class="contact-label-email block text-sm font-medium text-gray-300">Adresse Email</label>
                             <input type="email" id="email" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="vous@exemple.com">
                         </div>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
+                        <label for="message" class="contact-label-msg block text-sm font-medium text-gray-300">Message</label>
                         <textarea id="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="Comment puis-je vous aider ?"></textarea>
                     </div>
                     <div>
-                        <button type="button" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-gray-900 transition-colors">
+                        <button type="button" class="contact-btn w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-secondary focus:outline-none transition-colors">
                             Envoyer le message
                         </button>
                     </div>
@@ -397,9 +419,9 @@
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
-                <p class="text-gray-500 text-sm flex gap-4 text-center">
-                    <span>📱 +225 0715415107 / +226 64476058 </span>
-                    <span>📍 Cocody, Abidjan, Côte d'Ivoire </span>
+                <p class="text-gray-400 text-sm flex gap-4 text-center">
+                    <span>📱 +225 0715415107 / +226 64476058</span>
+                    <span>📍 Cocody, Abidjan, Côte d'Ivoire</span>
                 </p>
                 <p class="text-gray-500 text-sm mt-4">
                     &copy; 2026 Wilfried KOFFI. Tous droits réservés.
@@ -408,8 +430,9 @@
         </div>
     </section>
 
+    <!-- Scripts de gestion du Thème et de la Langue -->
     <script>
-        // Script pour gérer l'ouverture et la fermeture du menu mobile
+        // --- GESTION DU MENU MOBILE ---
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
 
@@ -417,7 +440,6 @@
             menu.classList.toggle('hidden');
         });
 
-        // Fermer le menu mobile lors du clic sur un lien
         const mobileLinks = menu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -425,15 +447,227 @@
             });
         });
 
-        // Effet de navbar au scroll
+        // --- GESTION DU MODE SOMBRE / CLAIR ---
+        function toggleTheme() {
+            const root = document.getElementById('html-root');
+            root.classList.toggle('dark');
+            if (root.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Charger le thème enregistré au démarrage
+        if (localStorage.getItem('theme') === 'dark') {
+            document.getElementById('html-root').classList.add('dark');
+        }
+
+        // --- GESTION DE LA TRADUCTION (FR / EN) ---
+        let currentLang = 'fr';
+
+        const translations = {
+            fr: {
+                navAbout: "À propos",
+                navSkills: "Compétences",
+                navExp: "Expériences & Projets",
+                navContact: "Contactez-moi",
+                heroBadge: "PORTFOLIO PROFESSIONNEL",
+                heroGreeting: "Bonjour, je suis",
+                heroDesc: "Étudiant en Ingénierie Électrique avec une solide base théorique et pratique en circuits, systèmes énergétiques et programmation.",
+                btnProjects: "Voir mes projets",
+                btnContact: "Me contacter",
+                aboutTag: "Profil",
+                aboutTitle: "À propos de moi",
+                aboutText1: "Actuellement <strong>Élève Ingénieur (Bachelor 1, 2 et 3) à l'Institut 2iE</strong> (Ouagadougou), je me spécialise dans le Génie Électrique et Énergétique. Mon parcours s'appuie sur de solides bases scientifiques acquises lors de l'obtention de mon <strong>Baccalauréat Série D au Lycée de Garçons de Bingerville</strong> (Côte d'Ivoire) en 2021.",
+                aboutText2: "Passionné par la robotique et l'informatique, je suis ouvert à toute opportunité qui me permettra de contribuer activement au développement de solutions technologiques innovantes dans le secteur de l'énergie.",
+                infoElec: "Génie Électrique",
+                infoEnergy: "Systèmes Énergétiques",
+                infoLang: "Anglais (Intermédiaire)",
+                skillsTag: "Expertise",
+                skillsTitle: "Mes Compétences",
+                skillsSubtitle: "Un panel de compétences techniques alliées à des outils professionnels de pointe.",
+                box1Title: "Ingénierie Électrique & Énergie Solaire",
+                box1List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Analyse et conception de circuits DC et AC</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Systèmes énergétiques (solaire, hydraulique, thermique)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électromagnétisme, transformateurs et bobines</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Dimensionnement et configuration d'onduleurs hybrides</li>`,
+                box2Title: "Automatisme Industriel",
+                box2List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation LADDER & GRAFCET</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Zelio Soft 2</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Logiciel Crouzet Millenium 3</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Conception sur AutoCAD et Legrand XL Pro 4</li>`,
+                box3Title: "Électronique & Maintenance",
+                box3List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Électronique de base (diodes, transistors)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Outils de laboratoire (oscilloscope, multimètre)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Diagnostic et réparation de cartes mères</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maintenance de groupes électrogènes (gestion de fluides)</li>`,
+                box4Title: "Programmation & Informatique",
+                box4List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation en C, Python et Skylab</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation de microcontrôleurs (Arduino)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Développement Web (HTML / CSS)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Word et PowerPoint</li>`,
+                expTag: "Parcours",
+                expTitle: "Expériences & Projets",
+                badgeStage: "Stage",
+                badgeImmersion: "Stage d'Immersion",
+                badgeIndep: "Indépendant",
+                badgeEnt: "Entrepreneuriat",
+                badgeProj: "Projet Maker",
+                badgeIot: "Projet IoT",
+                expDesc1: "Conception, dimensionnement et évaluation de systèmes solaires photovoltaïques. Application pratique des normes électriques et optimisation des installations.",
+                expDesc2: "Maintenance préventive du groupe électrogène Genesal 1500 KVA utilisé au NOOM HOTEL. Gestion des fluides, inspection visuelle, remplacement de pièces, vérifications électriques et tests fonctionnels.",
+                expDesc3: "Réparation et maintenance d'équipements informatiques et appareils électroniques. Diagnostic de pannes, remplacement de composants défectueux et assistance aux clients.",
+                expDesc4: "Gestion complète d'un service d'impression sur le campus universitaire. Développement de compétences en gestion, relation client et maintenance des équipements d'impression.",
+                expCowieSub: "Système de refroidissement éco-bioclimatique",
+                expDesc5: "Conception et développement d'une solution de refroidissement innovante basée sur des principes bioclimatiques, visant à réduire la consommation énergétique.",
+                expHelmetTitle: "Casque Intelligent",
+                expHelmetSub: "Prototype sous Arduino",
+                expDesc6: "Création d'un prototype de casque de moto intelligent intégrant des capteurs. Programmation sous Arduino pour envoyer automatiquement des alertes SMS d'urgence en cas de choc.",
+                contactTitle: "Prêt à collaborer ?",
+                contactSubtitle: "N'hésitez pas à me contacter pour un stage, un projet ou toute opportunité professionnelle.",
+                contactLabelName: "Nom complet",
+                contactLabelEmail: "Adresse Email",
+                contactLabelMsg: "Message",
+                contactBtn: "Envoyer le message"
+            },
+            en: {
+                navAbout: "About",
+                navSkills: "Skills",
+                navExp: "Experience & Projects",
+                navContact: "Contact Me",
+                heroBadge: "PROFESSIONAL PORTFOLIO",
+                heroGreeting: "Hello, I am",
+                heroDesc: "Electrical Engineering student with a solid theoretical and practical background in circuits, energy systems, and programming.",
+                btnProjects: "View my projects",
+                btnContact: "Contact me",
+                aboutTag: "Profile",
+                aboutTitle: "About Me",
+                aboutText1: "Currently an <strong>Engineering Student (Bachelor 1, 2 and 3) at 2iE Institute</strong> (Ouagadougou), specializing in Electrical and Energy Engineering. My background is built upon solid scientific foundations acquired after earning my <strong>Baccalaureate Series D at Lycée de Garçons de Bingerville</strong> (Cote d'Ivoire) in 2021.",
+                aboutText2: "Passionate about robotics and IT, I am open to any opportunity that will allow me to actively contribute to developing innovative technological solutions in the energy sector.",
+                infoElec: "Electrical Engineering",
+                infoEnergy: "Energy Systems",
+                infoLang: "English (Intermediate)",
+                skillsTag: "Expertise",
+                skillsTitle: "My Skills",
+                skillsSubtitle: "A set of technical skills combined with cutting-edge professional tools.",
+                box1Title: "Electrical Engineering & Solar Energy",
+                box1List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Analysis and design of DC and AC circuits</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Energy systems (solar, hydraulic, thermal)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Electromagnetism, transformers, and coils</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Hybrid inverter sizing and configuration</li>`,
+                box2Title: "Industrial Automation",
+                box2List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> LADDER & GRAFCET programming</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Proficiency in Zelio Soft 2</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Crouzet Millenium 3 software</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Design on AutoCAD and Legrand XL Pro 4</li>`,
+                box3Title: "Electronics & Maintenance",
+                box3List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Basic electronics (diodes, transistors)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Lab tools usage (oscilloscope, multimeter)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Motherboard diagnostics and repair</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Generator maintenance (fluid management)</li>`,
+                box4Title: "Programming & IT",
+                box4List: `<li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> C, Python, and Skylab programming</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Microcontroller programming (Arduino)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Web Development (HTML / CSS)</li>
+                           <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Word and PowerPoint proficiency</li>`,
+                expTag: "Background",
+                expTitle: "Experience & Projects",
+                badgeStage: "Internship",
+                badgeImmersion: "Immersion Internship",
+                badgeIndep: "Independent",
+                badgeEnt: "Entrepreneurship",
+                badgeProj: "Maker Project",
+                badgeIot: "IoT Project",
+                expDesc1: "Design, sizing, and performance evaluation of photovoltaic solar systems. Practical application of electrical standards and installation optimization.",
+                expDesc2: "Preventive maintenance of the 1500 KVA Genesal generator used at NOOM HOTEL. Fluid management, visual inspection, part replacement, electrical checks, and functional tests.",
+                expDesc3: "Repair and maintenance of computer equipment and electronic devices. Hardware and software troubleshooting, replacement of defective components, and customer assistance.",
+                expDesc4: "Complete management of a document printing service on the university campus. Development of management, customer relations, and equipment maintenance skills.",
+                expCowieSub: "Eco-bioclimatic cooling system",
+                expDesc5: "Design and development of an innovative cooling solution based on bioclimatic principles, aiming to reduce energy consumption.",
+                expHelmetTitle: "Smart Helmet",
+                expHelmetSub: "Arduino Prototype",
+                expDesc6: "Creation of an intelligent motorcycle helmet prototype integrating sensors. Programmed with Arduino to automatically send emergency SMS alerts in case of a crash.",
+                contactTitle: "Ready to collaborate?",
+                contactSubtitle: "Feel free to contact me for an internship, a project, or any professional opportunity.",
+                contactLabelName: "Full Name",
+                contactLabelEmail: "Email Address",
+                contactLabelMsg: "Message",
+                contactBtn: "Send Message"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const t = translations[currentLang];
+
+            // Mise à jour des éléments textuels
+            document.querySelectorAll('.nav-about').forEach(el => el.textContent = t.navAbout);
+            document.querySelectorAll('.nav-skills').forEach(el => el.textContent = t.navSkills);
+            document.querySelectorAll('.nav-exp').forEach(el => el.textContent = t.navExp);
+            document.querySelectorAll('.nav-contact').forEach(el => el.textContent = t.navContact);
+            
+            document.querySelector('.hero-badge').textContent = t.heroBadge;
+            document.querySelector('.hero-greeting').textContent = t.heroGreeting;
+            document.querySelector('.hero-desc').textContent = t.heroDesc;
+            document.querySelector('.btn-projects').textContent = t.btnProjects;
+            document.querySelector('.btn-contact').textContent = t.btnContact;
+
+            document.querySelector('.about-tag').textContent = t.aboutTag;
+            document.querySelector('.about-title').textContent = t.aboutTitle;
+            document.querySelector('.about-text-1').innerHTML = t.aboutText1;
+            document.querySelector('.about-text-2').innerHTML = t.aboutText2;
+            document.querySelector('.info-elec').textContent = t.infoElec;
+            document.querySelector('.info-energy').textContent = t.infoEnergy;
+            document.querySelector('.info-lang').textContent = t.infoLang;
+
+            document.querySelector('.skills-tag').textContent = t.skillsTag;
+            document.querySelector('.skills-title').textContent = t.skillsTitle;
+            document.querySelector('.skills-subtitle').textContent = t.skillsSubtitle;
+
+            document.querySelector('.skill-box-1-title').textContent = t.box1Title;
+            document.querySelector('.skill-box-1-list').innerHTML = t.box1List;
+            document.querySelector('.skill-box-2-title').textContent = t.box2Title;
+            document.querySelector('.skill-box-2-list').innerHTML = t.box2List;
+            document.querySelector('.skill-box-3-title').textContent = t.box3Title;
+            document.querySelector('.skill-box-3-list').innerHTML = t.box3List;
+            document.querySelector('.skill-box-4-title').textContent = t.box4Title;
+            document.querySelector('.skill-box-4-list').innerHTML = t.box4List;
+
+            document.querySelector('.exp-tag').textContent = t.expTag;
+            document.querySelector('.exp-title').textContent = t.expTitle;
+            document.querySelector('.badge-stage').textContent = t.badgeStage;
+            document.querySelector('.badge-immersion').textContent = t.badgeImmersion;
+            document.querySelector('.badge-indep').textContent = t.badgeIndep;
+            document.querySelector('.badge-ent').textContent = t.badgeEnt;
+            document.querySelector('.badge-proj').textContent = t.badgeProj;
+            document.querySelector('.badge-iot').textContent = t.badgeIot;
+
+            document.querySelector('.exp-desc-1').textContent = t.expDesc1;
+            document.querySelector('.exp-desc-2').textContent = t.expDesc2;
+            document.querySelector('.exp-desc-3').textContent = t.expDesc3;
+            document.querySelector('.exp-desc-4').textContent = t.expDesc4;
+            document.querySelector('.exp-cowie-sub').textContent = t.expCowieSub;
+            document.querySelector('.exp-desc-5').textContent = t.expDesc5;
+            document.querySelector('.exp-helmet-title').textContent = t.expHelmetTitle;
+            document.querySelector('.exp-helmet-sub').textContent = t.expHelmetSub;
+            document.querySelector('.exp-desc-6').textContent = t.expDesc6;
+
+            document.querySelector('.contact-title').textContent = t.contactTitle;
+            document.querySelector('.contact-subtitle').textContent = t.contactSubtitle;
+            document.querySelector('.contact-label-name').textContent = t.contactLabelName;
+            document.querySelector('.contact-label-email').textContent = t.contactLabelEmail;
+            document.querySelector('.contact-label-msg').textContent = t.contactLabelMsg;
+            document.querySelector('.contact-btn').textContent = t.contactBtn;
+        }
+
+        // Effet navbar scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
                 navbar.classList.add('shadow-md');
-                navbar.classList.replace('bg-white/90', 'bg-white/95');
             } else {
                 navbar.classList.remove('shadow-md');
-                navbar.classList.replace('bg-white/95', 'bg-white/90');
             }
         });
     </script>
