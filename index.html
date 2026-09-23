@@ -1,406 +1,127 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilfried KOFFI - Portfolio</title>
-    
-    <!-- Tailwind CSS pour le style -->
+    <title>Portfolio - Wilfried KOFFI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Configuration Tailwind pour des couleurs personnalisées -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2563eb', // Bleu électrique/professionnel
-                        secondary: '#1e40af',
-                        light: '#f8fafc',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        /* Application du fond blanc pour l'image de profil */
+        .profile-img-container {
+            background-color: #ffffff;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-primary selection:text-white">
+<body class="bg-gray-50 font-sans text-gray-800">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-effect border-b border-gray-100 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo / Nom -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="text-xl font-bold text-gray-900 tracking-tight">
-                        W. <span class="text-primary">KOFFI</span>
-                    </a>
-                </div>
-                
-                <!-- Menu Desktop -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">À propos</a>
-                    <a href="#skills" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">Compétences</a>
-                    <a href="#experience" class="text-gray-600 hover:text-primary transition-colors text-sm font-medium">Expériences & Projets</a>
-                    <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-secondary transition-colors shadow-sm">Contactez-moi</a>
-                </div>
-
-                <!-- Menu Mobile Bouton -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+    <!-- Header Section -->
+    <header class="bg-blue-900 text-white py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <!-- Espace réservé pour la photo avec fond blanc -->
+            <div class="profile-img-container inline-block rounded-full p-2 mb-4 shadow-lg">
+                <img src="votre_photo.jpg" alt="Wilfried KOFFI" class="w-32 h-32 rounded-full object-cover">
+            </div>
+            <h1 class="text-4xl font-bold tracking-tight">Kouassi Wilfried KOFFI[cite: 1]</h1>
+            <p class="mt-2 text-lg text-blue-200">Étudiant en Ingénierie Électrique[cite: 1]</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+                <span>📧 Kouassi.w.koffi@gmail.com[cite: 1]</span>
+                <span>📱 +225 0715415107 / +226 64476058[cite: 1]</span>
+                <span>📍 Cocody, Abidjan, Côte d'Ivoire[cite: 1]</span>
             </div>
         </div>
-        
-        <!-- Menu Mobile Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-3 space-y-1 shadow-lg">
-            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">À propos</a>
-            <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Compétences</a>
-            <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Expériences & Projets</a>
-            <a href="#contact" class="block px-3 py-2 mt-4 text-center rounded-md text-base font-medium bg-primary text-white hover:bg-secondary">Contactez-moi</a>
-        </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
-        <!-- Décoration d'arrière-plan -->
-        <div class="absolute inset-0 z-0 opacity-30">
-            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-100 blur-3xl"></div>
-            <div class="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-blue-50 blur-3xl"></div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-primary text-sm font-semibold tracking-wider mb-6 border border-blue-100">
-                PORTFOLIO PROFESSIONNEL
-            </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-4">
-                Bonjour, je suis <span class="text-primary block mt-2">Wilfried KOFFI</span>
-            </h1>
-            <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto font-light leading-relaxed">
-                Élève Ingénieur en Génie Électrique et Énergétique. 
-                Passionné par l'innovation, la transition énergétique et les systèmes intelligents.
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- Profil -->
+        <section>
+            <h2 class="text-2xl font-bold border-b-2 border-blue-900 pb-2 mb-4">Profil</h2>
+            <p class="leading-relaxed text-gray-700">
+                Étudiant en ingénierie électrique avec une solide base théorique et pratique en circuits, systèmes énergétiques et programmation[cite: 1]. Capable d'utiliser des logiciels de simulation et de travailler en équipe sur des projets techniques[cite: 1]. Passionné par la robotique et l'informatique, je suis ouvert à toute opportunité qui me permettra de contribuer activement au développement de solutions technologiques innovantes dans le secteur de l'énergie[cite: 1].
             </p>
-            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#experience" class="inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-secondary shadow-lg shadow-blue-500/30 transition-all">
-                    Voir mes projets
-                </a>
-                <a href="#contact" class="inline-flex justify-center items-center px-8 py-3 border-2 border-gray-200 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all">
-                    Me contacter
-                </a>
-            </div>
+        </section>
+
+        <!-- Expériences Professionnelles -->
+        <section>
+            <h2 class="text-2xl font-bold border-b-2 border-blue-900 pb-2 mb-4">Expériences Professionnelles</h2>
             
-            <div class="mt-16 flex justify-center space-x-6 text-gray-400">
-                <a href="#" class="hover:text-primary transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="hover:text-gray-900 transition-colors text-2xl"><i class="fab fa-github"></i></a>
-                <a href="mailto:contact@example.com" class="hover:text-primary transition-colors text-2xl"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Profil</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    À propos de moi
-                </p>
-                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Stage d'Immersion Professionnelle[cite: 1]</h3>
+                <p class="text-gray-600 font-medium">INOVATEC | Août 2024 | Marcory, Abidjan, Côte d'Ivoire[cite: 1]</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                    <li>Maintenance préventive du groupe électrogène Genesal 1500 KVA utilisé au NOOM HOTEL à Abidjan[cite: 1].</li>
+                    <li>Gestion des fluides, inspection visuelle, remplacement de pièces, vérifications électriques et tests fonctionnels[cite: 1].</li>
+                </ul>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-                <!-- Image Placeholder ou Illustration -->
-                <div class="w-full md:w-5/12 relative">
-                    <div class="aspect-w-4 aspect-h-5 rounded-2xl overflow-hidden shadow-xl bg-gray-100 flex items-center justify-center border-4 border-white">
-                        <!-- Remplacer le src par une vraie photo si disponible -->
-                        <img src="https://placehold.co/600x750/e2e8f0/64748b?text=Photo+de+Profil" alt="Wilfried KOFFI" class="object-cover w-full h-full">
-                    </div>
-                    <!-- Décoration -->
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-50 rounded-full z-[-1]"></div>
-                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gray-100 rounded-full z-[-1]"></div>
+            <div>
+                <h3 class="text-xl font-semibold">Technicien de Maintenance et Réparation (Indépendant)[cite: 1]</h3>
+                <p class="text-gray-600 font-medium">NELSINO | 2023 - Présent | Kamboinsin, Ouagadougou, Burkina Faso[cite: 1]</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                    <li>Réparation et maintenance d'équipements informatiques (PC portables, de bureau) et d'appareils électroniques (smartphones, tablettes)[cite: 1].</li>
+                    <li>Diagnostic de pannes matérielles et logicielles, remplacement de composants défectueux (écrans, batteries, disques durs, etc.)[cite: 1].</li>
+                    <li>Installation et configuration de systèmes d'exploitation et logiciels, conseil et assistance technique aux clients[cite: 1].</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formation Académique -->
+        <section>
+            <h2 class="text-2xl font-bold border-b-2 border-blue-900 pb-2 mb-4">Formation Académique</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-lg font-semibold">Bachelor 1, 2 et 3 en Ingénierie[cite: 1]</h3>
+                    <p class="text-gray-600">Institut International d'Ingénierie de l'Eau et de l'Environnement (2iE) | 2022 - 2026 | Ouagadougou, Burkina Faso[cite: 1]</p>
                 </div>
-
-                <!-- Texte -->
-                <div class="w-full md:w-7/12 space-y-6">
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Actuellement <strong class="text-gray-900 font-semibold">Élève Ingénieur à l'Institut 2iE</strong> (Ouagadougou), je me spécialise dans le Génie Électrique et Énergétique. Mon parcours académique s'appuie sur de solides bases scientifiques acquises lors de mon passage en <strong class="text-gray-900 font-semibold">Classes Préparatoires aux Grandes Écoles (CPGE BCPST)</strong>.
-                    </p>
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Je suis animé par la volonté de concevoir des solutions durables et innovantes, que ce soit dans le domaine de l'énergie solaire, de l'automatisme industriel ou de l'électronique embarquée. 
-                    </p>
-                    <div class="grid grid-cols-2 gap-4 pt-4">
-                        <div class="flex items-center space-x-3 text-gray-700">
-                            <i class="fas fa-graduation-cap text-primary"></i>
-                            <span>Institut 2iE (Ouagadougou)</span>
-                        </div>
-                        <div class="flex items-center space-x-3 text-gray-700">
-                            <i class="fas fa-book-open text-primary"></i>
-                            <span>CPGE BCPST</span>
-                        </div>
-                        <div class="flex items-center space-x-3 text-gray-700">
-                            <i class="fas fa-bolt text-primary"></i>
-                            <span>Génie Électrique</span>
-                        </div>
-                        <div class="flex items-center space-x-3 text-gray-700">
-                            <i class="fas fa-leaf text-primary"></i>
-                            <span>Énergétique</span>
-                        </div>
-                    </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Baccalauréat Série D[cite: 1]</h3>
+                    <p class="text-gray-600">Lycée de Garçons de Bingerville | 2021 | Abidjan, Côte d'Ivoire[cite: 1]</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Expertise</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Mes Compétences
-                </p>
-                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
-                <p class="mt-4 text-gray-600 text-lg">Un panel de compétences techniques alliées à des outils professionnels de pointe.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Énergie Solaire & Électricité -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-solar-panel"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Énergie Solaire & Électricité</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Dimensionnement de systèmes photovoltaïques</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Configuration d'onduleurs hybrides</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Conception sur AutoCAD</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Utilisation de Legrand XL Pro 4</li>
+        <!-- Compétences Techniques & Logiciels -->
+        <section>
+            <h2 class="text-2xl font-bold border-b-2 border-blue-900 pb-2 mb-4">Compétences Techniques & Logiciels</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">Domaines d'expertise[cite: 1]</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Circuits électriques : Analyse et conception de circuits DC et AC[cite: 1].</li>
+                        <li>Électronique de base : Maîtrise des composants passifs et actifs (diodes, transistors)[cite: 1].</li>
+                        <li>Électromagnétisme : Compréhension des champs magnétiques, ondes, transformateurs et bobines[cite: 1].</li>
+                        <li>Systèmes énergétiques : Sources d'énergie (solaire, hydraulique, thermique) et bases des machines électriques[cite: 1].</li>
+                        <li>Instruments : Utilisation d'outils de laboratoire (oscilloscope, multimètre)[cite: 1].</li>
                     </ul>
                 </div>
-
-                <!-- Automatisme Industriel -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-cogs"></i>
+                <div>
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">Logiciels & Programmation[cite: 1]</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">C[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">Python[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">HTML[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">CSS[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">Skylab[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">Word[cite: 1]</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded text-sm font-medium">PowerPoint[cite: 1]</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Automatisme Industriel</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation LADDER & GRAFCET</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Maîtrise de Zelio Soft 2</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Logiciel Millenium 3</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Logique de commande industrielle</li>
-                    </ul>
-                </div>
 
-                <!-- Électronique & Maintenance -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Électronique & Maintenance</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Diagnostic et dépannage de cartes mères</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Réparation et maintenance d'imprimantes</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Analyse de circuits électroniques</li>
-                    </ul>
-                </div>
-
-                <!-- Programmation -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover">
-                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-2xl mb-6">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Programmation & Développement</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Programmation de microcontrôleurs (Arduino)</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Conception de prototypes IoT</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3 text-sm"></i> Développement Web (HTML / CSS)</li>
-                    </ul>
+                    <h3 class="font-bold text-lg text-blue-800 mt-6 mb-2">Langues[cite: 1]</h3>
+                    <p class="text-gray-700">Français (Couramment) | Anglais (Intermédiaire)[cite: 1]</p>
+                    
+                    <h3 class="font-bold text-lg text-blue-800 mt-6 mb-2">Centres d'intérêt[cite: 1]</h3>
+                    <p class="text-gray-700">Anglais, lecture technologique, fiction, IA, électronique[cite: 1].</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience & Projects Section -->
-    <section id="experience" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-primary tracking-wide uppercase">Parcours</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Expériences & Projets
-                </p>
-                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
-            </div>
+    </main>
 
-            <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
-                
-                <!-- Stage Suka Power -->
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                        <i class="fas fa-briefcase text-sm"></i>
-                    </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Suka Power Limited</h3>
-                            <span class="text-sm text-primary font-medium bg-blue-50 px-3 py-1 rounded-full">Stage</span>
-                        </div>
-                        <p class="text-gray-600 mb-3 font-medium">Stagiaire en Énergie Solaire</p>
-                        <p class="text-gray-500 text-sm">Conception, dimensionnement et évaluation de systèmes solaires photovoltaïques. Application pratique des normes électriques et optimisation des installations.</p>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p>© 2026 Kouassi Wilfried KOFFI. Tous droits réservés.</p>
+    </footer>
 
-                <!-- DIGI-PRINT -->
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-gray-700 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                        <i class="fas fa-print text-sm"></i>
-                    </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">DIGI-PRINT</h3>
-                            <span class="text-sm text-gray-600 font-medium bg-gray-200 px-3 py-1 rounded-full">Entrepreneuriat</span>
-                        </div>
-                        <p class="text-gray-600 mb-3 font-medium">Gérant du service d'impression</p>
-                        <p class="text-gray-500 text-sm">Gestion complète d'un service d'impression sur le campus universitaire. Développement de compétences en gestion, relation client et maintenance des équipements d'impression.</p>
-                    </div>
-                </div>
-
-                <!-- Projet COWIE -->
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-green-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                        <i class="fas fa-fan text-sm"></i>
-                    </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Projet COWIE</h3>
-                            <span class="text-sm text-green-700 font-medium bg-green-50 px-3 py-1 rounded-full">Projet Académique</span>
-                        </div>
-                        <p class="text-gray-600 mb-3 font-medium">Système de refroidissement éco-bioclimatique</p>
-                        <p class="text-gray-500 text-sm">Conception et développement d'une solution de refroidissement innovante basée sur des principes bioclimatiques, visant à réduire la consommation énergétique.</p>
-                    </div>
-                </div>
-
-                <!-- Casque Moto Intelligent -->
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-red-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                        <i class="fas fa-motorcycle text-sm"></i>
-                    </div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm card-hover">
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-gray-900 text-xl">Casque Intelligent</h3>
-                            <span class="text-sm text-red-600 font-medium bg-red-50 px-3 py-1 rounded-full">Projet Maker / IoT</span>
-                        </div>
-                        <p class="text-gray-600 mb-3 font-medium">Prototype sous Arduino</p>
-                        <p class="text-gray-500 text-sm">Création d'un prototype de casque de moto intelligent intégrant des capteurs. Programmation sous Arduino pour envoyer automatiquement des alertes SMS en cas de choc ou d'accident.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Prêt à collaborer ?</h2>
-                <p class="mt-4 text-lg text-gray-400">N'hésitez pas à me contacter pour un stage, un projet ou toute opportunité professionnelle.</p>
-            </div>
-
-            <div class="bg-gray-800 rounded-2xl p-8 md:p-10 shadow-2xl border border-gray-700">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300">Nom complet</label>
-                            <input type="text" id="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="Votre nom">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300">Adresse Email</label>
-                            <input type="email" id="email" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="vous@exemple.com">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
-                        <textarea id="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white focus:border-primary focus:ring-primary shadow-sm py-3 px-4 outline-none transition-colors" placeholder="Comment puis-je vous aider ?"></textarea>
-                    </div>
-                    <div>
-                        <button type="button" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-gray-900 transition-colors">
-                            Envoyer le message
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="mt-16 flex flex-col items-center justify-center space-y-4">
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-2xl">
-                        <span class="sr-only">LinkedIn</span>
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:contact@example.com" class="text-gray-400 hover:text-white transition-colors text-2xl">
-                        <span class="sr-only">Email</span>
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-                <p class="text-gray-500 text-sm">
-                    &copy; 2026 Wilfried KOFFI. Tous droits réservés.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Script pour gérer l'ouverture et la fermeture du menu mobile
-        const btn = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Fermer le menu mobile lors du clic sur un lien
-        const mobileLinks = menu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
-        // Effet de navbar au scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-md');
-                navbar.classList.replace('bg-white/90', 'bg-white/95');
-            } else {
-                navbar.classList.remove('shadow-md');
-                navbar.classList.replace('bg-white/95', 'bg-white/90');
-            }
-        });
-    </script>
 </body>
 </html>
